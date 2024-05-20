@@ -15,8 +15,8 @@ const productSchema = z.object({
   description: z.string().min(1),
   price: z.number().positive(),
   category: z.string().min(1),
-  tags: z.array(z.string()).optional(),
-  variants: z.array(variantSchema).optional(),
+  tags: z.array(z.string()),
+  variants: z.array(variantSchema),
   inventory: inventorySchema,
 });
 
