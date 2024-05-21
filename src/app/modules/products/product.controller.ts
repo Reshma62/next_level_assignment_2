@@ -5,7 +5,7 @@ import {
   getProductByIdService,
   searchProductService,
   updateProductByIdService,
-} from "./product.services";
+} from "./product.service";
 import { validateProduct } from "./product.validation";
 // create product
 export const createProductController = async (req: Request, res: Response) => {
