@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import {
   createProductService,
   deleteProductByIdService,
-  getAllProductsService,
   getProductByIdService,
+  searchProductService,
   updateProductByIdService,
 } from "./product.services";
 import { validateProduct } from "./product.validation";
@@ -29,9 +29,12 @@ export const createProductController = async (req: Request, res: Response) => {
   }
 };
 // get all products
-export const getAllProductsController = async (req: Request, res: Response) => {
+// serach product
+export const searchProductController = async (req: Request, res: Response) => {
   try {
-    const products = await getAllProductsService();
+    const searchTerm = req?.query?.searchTerm as string;
+    console.log(searchTerm, "searchTerm");
+    const products = await searchProductService(searchTerm);
     res.status(200).json({
       success: true,
       message: "Products fetched successfully",
@@ -92,7 +95,7 @@ export const deleteProductByIdController = async (
 ) => {
   try {
     const { productId } = req.params;
-    const product = await deleteProductByIdService(productId);
+    await deleteProductByIdService(productId);
     res.status(200).json({
       success: true,
       message: "Product deleted successfully",
@@ -105,3 +108,5 @@ export const deleteProductByIdController = async (
     });
   }
 };
+
+
